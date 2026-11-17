@@ -1,0 +1,7 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+data/
+documents/user_*
+reports/live_*

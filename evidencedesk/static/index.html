@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222823">
+  <title>EvidenceDesk — Your document workspace</title>
+  <link rel="stylesheet" href="/static/style.css?v=2">
+  <script src="/static/app.js?v=2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to workspace</a>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="EvidenceDesk home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>evidence<span class="brand-light">desk</span><span class="brand-period">.</span></span></a>
+    <div class="workspace-label"><span class="workspace-avatar">E</span><div>Personal workspace<small>Local on your computer</small></div></div>
+    <nav aria-label="Main navigation">
+      <button class="nav active" data-tab="workspace" aria-current="page"><span class="nav-icon" aria-hidden="true">⌕</span>Research desk<span class="nav-arrow">↗</span></button>
+      <button class="nav" data-tab="benchmark"><span class="nav-icon" aria-hidden="true">▥</span>Evaluation</button>
+      <button class="nav" data-tab="activity"><span class="nav-icon" aria-hidden="true">◷</span>Activity</button>
+    </nav>
+    <div class="sidebar-collection"><span class="sidebar-caption">STARTER COLLECTION</span><p>Arts centre<br>handbook<span class="collection-dot"></span></p><small>Fictional sample documents</small></div>
+    <div class="sidebar-bottom"><span class="connection" id="connection">Connecting…</span><a href="/openapi.json" target="_blank" rel="noopener">API schema <span>↗</span></a><span class="version">EvidenceDesk / 02</span></div>
+  </aside>
+  <main id="main">
+    <header class="topbar"><div><span class="breadcrumb-parent">Workspace</span><span class="breadcrumb-slash">/</span><span id="breadcrumb">Research desk</span></div><div class="topbar-right"><span id="provider" class="provider-badge">Connecting</span><button class="upload-trigger top-upload">+ Add documents</button></div></header>
+    <section class="tab" id="workspace">
+      <div class="page-intro"><div><div class="eyebrow"><span></span> DOCUMENT SEARCH</div><h1>Ask your <em>documents.</em></h1><p>Find a passage. Check its source. Keep the evidence close.</p></div><div class="corpus-counter"><strong id="document-count">—</strong><span>documents<br>in your collection</span></div></div>
+      <div class="desk-grid">
+        <div class="research-column">
+          <section class="question-card" aria-label="Ask a question">
+            <form id="ask-form"><label for="question">What would you like to know?</label><textarea id="question" minlength="3" maxlength="1500" required placeholder="How do I book a workshop?"></textarea><div class="composer-footer"><div class="search-method"><span class="method-dot"></span><label class="sr-only" for="mode">Search method</label><select id="mode"><option value="hybrid">Hybrid + reranking</option><option value="keyword">Keyword · BM25</option><option value="vector">Vector search</option></select></div><button id="ask-button" class="primary" type="submit">Find evidence <span>↗</span></button></div></form>
+            <div class="mode-description" id="mode-note">Connecting to your search service…</div>
+          </section>
+          <div class="suggestions"><span>Try asking</span><button data-question="What are the weekend opening hours?">Weekend opening hours ↗</button><button data-question="What materials are provided for beginner drawing?">Drawing materials ↗</button><button data-question="What will the weather be tomorrow?">A question outside the collection ↗</button></div>
+          <section class="empty-result" id="empty-result"><div class="paper-stack" aria-hidden="true"><div class="paper-back"></div><div class="paper-front"><span></span><span></span><span></span><b>“</b></div><i>↗</i></div><h2>Your evidence will appear here</h2><p>Ask a question to see matching passages<br>and the files they came from.</p><div class="search-footnote"><span id="chunk-count">—</span> indexed passages <span class="separator">·</span><span id="vector-label">Loading search method</span></div></section>
+          <section class="answer-card" id="answer-card" hidden aria-live="polite"><div class="answer-header"><span class="answer-kicker" id="answer-status"></span><button class="text-button" id="copy-answer" type="button">Copy text ↗</button></div><h2 id="answer-heading">Source excerpt</h2><div id="answer-body"></div><div id="citations"></div><div id="answer-metrics" class="answer-metrics"></div></section>
+          <section class="sources-panel" id="sources-panel" hidden><div class="section-heading"><h2>Retrieved passages</h2><span id="source-count"></span></div><div id="sources"></div></section>
+        </div>
+        <aside class="library-panel"><div class="library-title"><div><span class="eyebrow">YOUR SOURCES</span><h2>Document library<span id="library-count">—</span></h2></div><button class="icon-button upload-trigger" aria-label="Add a document">+</button></div><label class="library-search"><span aria-hidden="true">⌕</span><input id="file-search" type="search" placeholder="Find a document…" aria-label="Find a document"></label><ul id="document-list" class="document-list"></ul><p id="library-empty" class="muted" hidden>No matching documents.</p><button class="dropzone upload-trigger" id="dropzone"><span class="upload-symbol" aria-hidden="true">↑</span><strong>Drop a document here</strong><span>or click to browse your files</span><small>PDF, TXT, MD · up to 5 MB</small></button><input type="file" id="upload-file" accept=".pdf,.txt,.md" hidden><p id="upload-status" class="upload-status" role="status"></p><div class="collection-note"><span class="note-icon">i</span><p>The starter collection is a fictional arts-centre handbook. Add your own files to explore another topic.</p></div><details class="index-details"><summary>Index details</summary><p id="index-version"></p><p id="reranker-label"></p></details></aside>
+      </div>
+    </section>
+    <section class="tab" id="benchmark" hidden><div class="page-intro"><div><div class="eyebrow"><span></span> RETRIEVAL QUALITY</div><h1>Put search to <em>the test.</em></h1><p>Compare three retrieval methods on the same questions.</p></div><button id="evaluate-button" class="primary">Run benchmark ↗</button></div><div class="evaluation-banner"><strong>60<span>fixed questions</span></strong><p>48 answerable questions and 12 unsupported questions from the fictional sample collection. Results measure retrieval and the relevance gate.</p></div><p id="evaluation-status" class="section-note" role="status"></p><div class="table-wrap"><table><thead><tr><th>Method</th><th>Hit@5</th><th>MRR@5</th><th>Unsupported rejected</th><th>Answerable accepted</th><th>P95 retrieval</th></tr></thead><tbody id="evaluation-summary"></tbody></table></div><div class="section-heading results-heading"><h2>Every question, accounted for.</h2><label class="filter-label"><input type="checkbox" id="failures-only">Show review cases only</label></div><div id="evaluation-rows" class="evaluation-rows"></div><p class="section-note">This synthetic benchmark was written alongside the sample documents. Citation checks and retrieval scores require additional answer-quality review.</p></section>
+    <section class="tab" id="activity" hidden><div class="page-intro"><div><div class="eyebrow"><span></span> REQUEST OBSERVABILITY</div><h1>See what <em>happened.</em></h1><p>Latency, usage, and outcomes from your latest 1,000 requests.</p></div><button id="refresh-metrics" class="secondary">Refresh ↻</button></div><div class="metric-grid" id="metrics-stats"></div><div class="section-heading results-heading"><h2>Recent requests</h2><span>Latest 30</span></div><div class="table-wrap"><table><thead><tr><th>Time</th><th>Outcome</th><th>Method</th><th>Retrieval</th><th>Generation</th><th>Tokens in / out</th><th>API cost</th></tr></thead><tbody id="request-rows"></tbody></table></div><p class="section-note">API costs use your configured token prices. Local hardware and electricity are excluded. Missing prices or unreported usage appear as unknown.</p></section>
+    <footer><span>EvidenceDesk</span><span>Document search with traceable sources.</span></footer>
+  </main>
+  <dialog id="document-dialog" class="document-dialog"><div class="dialog-header"><span class="eyebrow">DOCUMENT PREVIEW</span><button class="icon-button" id="close-document" aria-label="Close document preview">×</button></div><h2 id="preview-title"></h2><p id="preview-filename"></p><div id="preview-content"></div></dialog>
+  <div class="toast" id="toast" hidden role="status"></div>
+</body>
+</html>

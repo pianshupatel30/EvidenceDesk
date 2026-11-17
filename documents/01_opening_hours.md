@@ -1,0 +1,1 @@
+The Harbor Arts Centre opens Tuesday through Friday from 10 am to 7 pm. On Saturday and Sunday it opens from 9 am to 5 pm. The centre is closed on Mondays. The last gallery admission is thirty minutes before closing. The reading room follows the same opening hours as the centre. Holiday opening hours are announced on the noticeboard one week in advance.
